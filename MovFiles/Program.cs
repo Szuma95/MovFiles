@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-class Program
+﻿class Program
 {
     static void Main()
     {
@@ -12,7 +9,7 @@ class Program
         {
             Console.WriteLine("\nList of folders and subfolders:");
 
-            // Call the recursive function
+            // Call the recursive function.
             DisplayFolders(directoryPath, "");
 
             Console.WriteLine("\nFinished processing.");
@@ -35,15 +32,15 @@ class Program
         {
             Console.WriteLine($"{indent} - {Path.GetFileName(folder)}");
 
-            // Check if .mov files exist in the current folder
+            // Check if .mov files exist in the current folder.
             string[] movFiles = Directory.GetFiles(folder, "*.mov");
             bool isCreated = false;
 
             if (movFiles.Length > 0)
             {
-                // Create "MOV" folder if it doesn't exist
                 string newPath = folder + "\\" + Path.GetFileName(folder);
 
+                // Create "MOV" folder if it doesn't exist.
                 if (!Directory.Exists(newPath))
                 {
                     Directory.CreateDirectory(newPath);
@@ -51,6 +48,7 @@ class Program
                     Console.WriteLine($"Created 'MOV' folder in: {Path.GetFileName(newPath)}");
                 }
 
+                // Move files to new folder.
                 foreach (var movFile in movFiles)
                 {
                     string movFileName = Path.GetFileName(movFile);
@@ -60,14 +58,14 @@ class Program
                 }
             }
 
+            // Do not check the new subfolder.
             if (isCreated)
             {
                 continue;
             }
 
-            // Recursively call the function for subfolders
+            // Recursively call the function for subfolders.
             DisplayFolders(folder, indent + "  ");
         }
-
     }
 }
